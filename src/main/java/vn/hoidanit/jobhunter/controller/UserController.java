@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 public class UserController {
@@ -45,6 +46,13 @@ public class UserController {
     @GetMapping("/user")
     public List<User> fetchAllUser() {
         return this.userService.fetchAllUser();
+    }
+
+    // update a user
+    @PutMapping("/user")
+    public User updateUser(@RequestBody User postManUser) {
+        User user = this.userService.handleUpdateUser(postManUser);
+        return user;
     }
 
 }
