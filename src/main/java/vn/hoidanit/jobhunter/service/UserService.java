@@ -13,8 +13,8 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public void handelCreatUser(User user) {
-        this.userRepository.save(user);
+    public User handelCreateUser(User user) {
+        return this.userRepository.save(user);
     }
 
 }
