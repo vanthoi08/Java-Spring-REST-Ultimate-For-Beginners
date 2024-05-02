@@ -42,6 +42,7 @@ public class UserController {
         this.userService.handelDeleteUser(id);
         // return ResponseEntity.ok("delete user");
         // return ResponseEntity.status(HttpStatus.OK).body("delete user");
+        // status 204
         return ResponseEntity.noContent().build();
     }
 
