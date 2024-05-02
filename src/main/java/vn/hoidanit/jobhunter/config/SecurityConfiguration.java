@@ -26,14 +26,16 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .csrf(c -> c.disable())
                 .authorizeHttpRequests(
                         authz -> authz
                                 // cho phép vào trang chủ không cần đăng nhập
                                 .requestMatchers("/").permitAll()
-                                .anyRequest().authenticated()
+                                // .anyRequest().authenticated()
+                                .anyRequest().permitAll()
 
                 )
-                .formLogin(f -> f.permitAll())
+                .formLogin(f -> f.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
     }
