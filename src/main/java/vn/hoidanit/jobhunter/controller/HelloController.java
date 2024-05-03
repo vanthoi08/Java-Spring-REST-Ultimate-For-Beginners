@@ -10,8 +10,8 @@ public class HelloController {
 
     @GetMapping("/")
     public String getHelloWorld() throws IdInvalidException {
-        if (true)
-            throw new IdInvalidException("check message");
+        // if (true)
+        // throw new IdInvalidException("check message");
         return "Hello World (Hỏi Dân IT & Eric)";
     }
 }
