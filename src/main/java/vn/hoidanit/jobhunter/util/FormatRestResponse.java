@@ -46,7 +46,7 @@ public class FormatRestResponse implements ResponseBodyAdvice<Object> {
         } else {
             // case succes
             res.setData(body);
-            res.setMessage("CALL API SUCCESS");
+            res.setMessage("CALL API SUCCESS THÀNH CÔNG");
 
         }
 
