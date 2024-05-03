@@ -55,12 +55,12 @@ public class SecurityConfiguration {
                         // On xác thực token
                         .authenticationEntryPoint(customAuthenticationEntryPoint))
                 // custom
-                .exceptionHandling(
-                        exceptions -> exceptions
-                                .authenticationEntryPoint(new BearerTokenAuthenticationEntryPoint()) // lỗi 401:
-                                                                                                     // Unuthorized
+                // .exceptionHandling(
+                // exceptions -> exceptions
+                // .authenticationEntryPoint(new BearerTokenAuthenticationEntryPoint()) // lỗi
+                // 401:
 
-                                .accessDeniedHandler(new BearerTokenAccessDeniedHandler())) // lỗi 403
+                // .accessDeniedHandler(new BearerTokenAccessDeniedHandler())) // lỗi 403
 
                 .formLogin(f -> f.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
