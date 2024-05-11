@@ -7,6 +7,7 @@ import com.turkraft.springfilter.boot.Filter;
 import vn.hoidanit.jobhunter.domain.ResultPaginationDTO;
 import vn.hoidanit.jobhunter.domain.User;
 import vn.hoidanit.jobhunter.service.UserService;
+import vn.hoidanit.jobhunter.util.annotation.ApiMessage;
 import vn.hoidanit.jobhunter.util.error.IdInvalidException;
 
 import java.util.List;
@@ -68,6 +69,7 @@ public class UserController {
 
     // fetch all users
     @GetMapping("/users")
+    @ApiMessage("fetch all users")
     public ResponseEntity<ResultPaginationDTO> fetchAllUser(
             @Filter Specification<User> spec,
             Pageable pageable) {
