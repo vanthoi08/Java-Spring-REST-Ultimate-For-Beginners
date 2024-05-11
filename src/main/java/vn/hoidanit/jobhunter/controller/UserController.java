@@ -70,21 +70,9 @@ public class UserController {
     @GetMapping("/users")
     public ResponseEntity<ResultPaginationDTO> fetchAllUser(
             @Filter Specification<User> spec,
-            @RequestParam("current") Optional<String> currentOptional,
-            @RequestParam("pageSize") Optional<String> pageSizeOptional) {
+            Pageable pageable) {
 
-        // String sCurrent = currentOptional.isPresent() ? currentOptional.get() : "";
-        // String sPageSize = pageSizeOptional.isPresent() ? pageSizeOptional.get() :
-        // "";
-
-        // Convert String to int
-
-        // int current = Integer.parseInt(sCurrent);
-        // int pageSize = Integer.parseInt(sPageSize);
-
-        // Pageable pageable = PageRequest.of(current - 1, pageSize);
-
-        return ResponseEntity.status(HttpStatus.OK).body(this.userService.fetchAllUser(spec));
+        return ResponseEntity.status(HttpStatus.OK).body(this.userService.fetchAllUser(spec, pageable));
     }
 
     // update a user

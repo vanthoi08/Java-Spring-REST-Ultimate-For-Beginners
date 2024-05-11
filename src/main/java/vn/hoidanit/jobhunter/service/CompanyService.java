@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import vn.hoidanit.jobhunter.domain.Company;
@@ -32,17 +33,17 @@ public class CompanyService {
         return null;
     }
 
-    public ResultPaginationDTO fetchAllCompany(Pageable pageable) {
+    public ResultPaginationDTO fetchAllCompany(Specification<Company> spec, Pageable pageable) {
 
-        Page<Company> pageCompany = this.companyRepository.findAll(pageable);
+        Page<Company> pageCompany = this.companyRepository.findAll(spec, pageable);
 
         ResultPaginationDTO rs = new ResultPaginationDTO();
         Meta mt = new Meta();
 
         // Get trang hiện tại
-        mt.setPage(pageCompany.getNumber() + 1);
+        mt.setPage(pageable.getPageNumber() + 1);
         // Get size
-        mt.setPageSize(pageCompany.getSize());
+        mt.setPageSize(pageable.getPageSize());
 
         // Get tổng số trang
         mt.setPages(pageCompany.getTotalPages());
