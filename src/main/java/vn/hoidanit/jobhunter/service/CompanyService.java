@@ -40,7 +40,7 @@ public class CompanyService {
         Meta mt = new Meta();
 
         // Get trang hiện tại
-        mt.setPage(pageCompany.getNumber());
+        mt.setPage(pageCompany.getNumber() + 1);
         // Get size
         mt.setPageSize(pageCompany.getSize());
 
