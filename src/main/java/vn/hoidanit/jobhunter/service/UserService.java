@@ -110,6 +110,7 @@ public class UserService {
             currentUser.setAge(reqUser.getAge());
             currentUser.setAddress(reqUser.getAddress());
             currentUser.setName(reqUser.getName());
+            currentUser.setGender(reqUser.getGender());
 
             // update
             currentUser = this.userRepository.save(currentUser);
