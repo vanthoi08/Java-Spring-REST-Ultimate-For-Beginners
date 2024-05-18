@@ -37,7 +37,7 @@ public class Company {
     private String logo;
 
     // format trả về front-end a: viết tắt AM,PM
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss a", timezone = "GMT+9")
+    // @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss a", timezone = "GMT+9")
     private Instant createdAt;
 
     private Instant updateAt;
