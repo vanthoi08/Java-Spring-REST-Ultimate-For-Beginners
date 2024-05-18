@@ -70,7 +70,7 @@ public class UserService {
                 item.getAddress(),
                 item.getAge(),
                 item.getCreatedAt(),
-                item.getUpdateAt()
+                item.getUpdatedAt()
 
         )).collect(Collectors.toList());
 
@@ -91,7 +91,7 @@ public class UserService {
          * itemUser.getAddress(),
          * itemUser.getAge(),
          * itemUser.getCreatedAt(),
-         * itemUser.getUpdateAt());
+         * itemUser.getupdatedAt());
          * // Thêm đối tượng ResUserDTO vào danh sách listUser
          * listUser.add(resUserDTO);
          * }
@@ -156,7 +156,7 @@ public class UserService {
         res.setAge(user.getAge());
         res.setAddress(user.getAddress());
         res.setCreatedAt(user.getCreatedAt());
-        res.setUpdateAt(user.getUpdateAt());
+        res.setUpdatedAt(user.getUpdatedAt());
 
         return res;
 
@@ -170,7 +170,7 @@ public class UserService {
         res.setAge(user.getAge());
         res.setAddress(user.getAddress());
         res.setGender(user.getGender());
-        res.setUpdateAt(user.getUpdateAt());
+        res.setUpdatedAt(user.getUpdatedAt());
 
         return res;
     }

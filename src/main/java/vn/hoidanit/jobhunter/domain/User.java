@@ -2,6 +2,8 @@ package vn.hoidanit.jobhunter.domain;
 
 import java.time.Instant;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -45,7 +47,9 @@ public class User {
     private String refreshToken;
 
     private Instant createdAt;
-    private Instant updateAt;
+
+    // @JsonProperty("updatedAt")
+    private Instant updatedAt;
 
     private String createdBy;
     private String updateBy;
@@ -64,7 +68,7 @@ public class User {
                 ? SecurityUtil.getCurrentUserLogin().get()
                 : "";
 
-        this.updateAt = Instant.now();
+        this.updatedAt = Instant.now();
 
     }
 }

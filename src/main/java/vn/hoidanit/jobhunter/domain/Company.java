@@ -3,6 +3,7 @@ package vn.hoidanit.jobhunter.domain;
 import java.time.Instant;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -40,7 +41,8 @@ public class Company {
     // @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss a", timezone = "GMT+9")
     private Instant createdAt;
 
-    private Instant updateAt;
+    // @JsonProperty("updatedAt")
+    private Instant updatedAt;
 
     private String createdBy;
 
@@ -60,7 +62,7 @@ public class Company {
                 ? SecurityUtil.getCurrentUserLogin().get()
                 : "";
 
-        this.updateAt = Instant.now();
+        this.updatedAt = Instant.now();
 
     }
 
