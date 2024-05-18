@@ -175,4 +175,15 @@ public class UserService {
         return res;
     }
 
+    public void updateUserToken(String token, String email) {
+        User currentUser = this.handleGetUserByUsername(email);
+        if (currentUser != null) {
+            currentUser.setRefreshToken(token);
+            // Save to database
+            this.userRepository.save(currentUser);
+
+        }
+
+    }
+
 }
