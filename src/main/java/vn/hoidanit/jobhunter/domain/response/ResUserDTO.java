@@ -25,20 +25,15 @@ public class ResUserDTO {
     private Instant createdAt;
     private Instant updatedAt;
 
-    // public ResUserDTO() {
-    // }
+    private CompanyUser company;
 
-    // public ResUserDTO(long id, String name, String email, GenderEnum gender,
-    // String address, int age, Instant createdAt,
-    // Instant updatedAt) {
-    // this.id = id;
-    // this.name = name;
-    // this.email = email;
-    // this.gender = gender;
-    // this.address = address;
-    // this.age = age;
-    // this.createdAt = createdAt;
-    // this.updatedAt = updatedAt;
-    // }
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class CompanyUser {
+        private long id;
+        private String name;
+    }
 
 }

@@ -3,6 +3,8 @@ package vn.hoidanit.jobhunter.domain;
 import java.time.Instant;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -51,6 +53,7 @@ public class Company {
     // 1 Company có nhiều user
     // mappy với company
     @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
+    @JsonIgnore // Không trả về danh sách user cho frontend tránh lặp vô hạn
     List<User> users;
 
     @PrePersist

@@ -16,5 +16,13 @@ public class ResCreateUserDTO {
     private int age;
     private String address;
     private Instant createdAt;
+    private CompanyUser company;
+
+    @Getter
+    @Setter
+    public static class CompanyUser {
+        private long id;
+        private String name;
+    }
 
 }
