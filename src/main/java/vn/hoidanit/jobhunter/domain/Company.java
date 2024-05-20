@@ -56,6 +56,12 @@ public class Company {
     @JsonIgnore // Không trả về danh sách user cho frontend tránh lặp vô hạn
     List<User> users;
 
+    // 1 company có nhiều job => 1-N
+    // mappy với company
+    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
+    @JsonIgnore // Không trả về danh sách jobs cho frontend tránh lặp vô hạn
+    List<Job> jobs;
+
     @PrePersist
     public void handleBeforeCreate() {
         this.createdBy = SecurityUtil.getCurrentUserLogin().isPresent() == true
