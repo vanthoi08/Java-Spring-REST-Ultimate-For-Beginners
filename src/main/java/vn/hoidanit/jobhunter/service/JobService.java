@@ -9,10 +9,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import vn.hoidanit.jobhunter.domain.Company;
 import vn.hoidanit.jobhunter.domain.Job;
 import vn.hoidanit.jobhunter.domain.Skill;
 import vn.hoidanit.jobhunter.domain.response.ResultPaginationDTO;
 import vn.hoidanit.jobhunter.domain.response.job.ResCreateJobDTO;
+import vn.hoidanit.jobhunter.repository.CompanyRepository;
 import vn.hoidanit.jobhunter.repository.JobRepository;
 import vn.hoidanit.jobhunter.repository.SkillRepository;
 
@@ -20,11 +22,13 @@ import vn.hoidanit.jobhunter.repository.SkillRepository;
 public class JobService {
     private final SkillRepository skillRepository;
     private final JobRepository jobRepository;
+    private final CompanyRepository companyRepository;
 
-    public JobService(SkillRepository skillRepository,
-            JobRepository jobRepository) {
+    public JobService(SkillRepository skillRepository, JobRepository jobRepository,
+            CompanyRepository companyRepository) {
         this.skillRepository = skillRepository;
         this.jobRepository = jobRepository;
+        this.companyRepository = companyRepository;
     }
 
     public Optional<Job> fetchJobById(long id) {
@@ -43,6 +47,14 @@ public class JobService {
             List<Skill> dbSkills = this.skillRepository.findByIdIn(reqSkills);
             // Cập nhật danh sách đã check
             j.setSkills(dbSkills);
+        }
+
+        // check company
+        if (j.getCompany() != null) {
+            Optional<Company> cOptional = this.companyRepository.findById(j.getCompany().getId());
+            if (cOptional.isPresent()) {
+                j.setCompany(cOptional.get());
+            }
         }
 
         // create job
@@ -71,7 +83,7 @@ public class JobService {
         return dto;
     }
 
-    public ResCreateJobDTO update(Job j) {
+    public ResCreateJobDTO update(Job j, Job jobInDB) {
         // check skills
         if (j.getSkills() != null) {
             // Lấy danh sách id của skills
@@ -82,11 +94,28 @@ public class JobService {
 
             List<Skill> dbSkills = this.skillRepository.findByIdIn(reqSkills);
             // Cập nhật danh sách đã check
-            j.setSkills(dbSkills);
+            jobInDB.setSkills(dbSkills);
+        }
+        // check company
+        if (j.getCompany() != null) {
+            Optional<Company> cOptional = this.companyRepository.findById(j.getCompany().getId());
+            if (cOptional.isPresent()) {
+                jobInDB.setCompany(cOptional.get());
+            }
         }
 
+        // update correct info
+        jobInDB.setName(j.getName());
+        jobInDB.setSalary(j.getSalary());
+        jobInDB.setQuantity(j.getQuantity());
+        jobInDB.setLocation(j.getLocation());
+        jobInDB.setLevel(j.getLevel());
+        jobInDB.setStartDate(j.getStartDate());
+        jobInDB.setEndDate(j.getEndDate());
+        jobInDB.setActive(j.isActive());
+
         // update job
-        Job currentJob = this.jobRepository.save(j);
+        Job currentJob = this.jobRepository.save(jobInDB);
 
         // convert response
         ResCreateJobDTO dto = new ResCreateJobDTO();

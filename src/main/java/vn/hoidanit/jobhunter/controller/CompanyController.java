@@ -6,16 +6,13 @@ import com.turkraft.springfilter.boot.Filter;
 
 import jakarta.validation.Valid;
 import vn.hoidanit.jobhunter.domain.Company;
-import vn.hoidanit.jobhunter.domain.User;
 import vn.hoidanit.jobhunter.domain.response.ResultPaginationDTO;
 import vn.hoidanit.jobhunter.service.CompanyService;
 import vn.hoidanit.jobhunter.util.annotation.ApiMessage;
 import vn.hoidanit.jobhunter.util.error.IdInvalidException;
 
-import java.util.List;
 import java.util.Optional;
 
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
@@ -58,17 +55,29 @@ public class CompanyController {
         return ResponseEntity.status(HttpStatus.OK).body(this.companyService.fetchAllCompany(spec, pageable));
     }
 
-    @DeleteMapping("companies/{id}")
+    @DeleteMapping("/companies/{id}")
+    @ApiMessage("Delete a company")
     public ResponseEntity<Void> deleteCompany(@PathVariable("id") long id) {
         this.companyService.handleDeleteCompany(id);
         // return ResponseEntity.status(HttpStatus.OK).build();
         return ResponseEntity.ok(null);
     }
 
-    @PutMapping("companies")
+    @PutMapping("/companies")
+    @ApiMessage("Update a company")
     public ResponseEntity<Company> updateCompany(@Valid @RequestBody Company company) {
         Company updateCompany = this.companyService.handleUpdateCompany(company);
         return ResponseEntity.ok(updateCompany);
+    }
+
+    @GetMapping("/companies/{id}")
+    @ApiMessage("Fetch company by id")
+    public ResponseEntity<Company> fetchCompanyById(@PathVariable("id") long id) throws IdInvalidException {
+        Optional<Company> cOptional = this.companyService.findById(id);
+        if (cOptional.isEmpty()) {
+            throw new IdInvalidException("Resume with id = " + id + " không tồn tại");
+        }
+        return ResponseEntity.ok().body(cOptional.get());
     }
 
 }

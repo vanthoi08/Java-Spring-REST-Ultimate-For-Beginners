@@ -27,6 +27,7 @@ public class ResFetchResumeDTO {
     private String createdBy;
     private String updatedBy;
 
+    private String companyName;
     // Định nghiã inner class
     private UserResume user;
     private JobResume job;
