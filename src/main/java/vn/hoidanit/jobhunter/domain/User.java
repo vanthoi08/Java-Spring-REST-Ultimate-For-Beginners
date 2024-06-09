@@ -69,6 +69,11 @@ public class User {
     @JsonIgnore
     List<Resume> resumes;
 
+    // Quan hệ User-Role là quan hệ N-1
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
+
     @PrePersist
     public void handleBeforeCreate() {
         this.createdBy = SecurityUtil.getCurrentUserLogin().isPresent() == true
