@@ -7,7 +7,6 @@ import com.turkraft.springfilter.boot.Filter;
 
 import jakarta.validation.Valid;
 import vn.hoidanit.jobhunter.domain.Permission;
-import vn.hoidanit.jobhunter.domain.Skill;
 import vn.hoidanit.jobhunter.domain.response.ResultPaginationDTO;
 import vn.hoidanit.jobhunter.service.PermissionService;
 import vn.hoidanit.jobhunter.util.annotation.ApiMessage;
@@ -59,7 +58,6 @@ public class PermissionController {
         if (this.permissionService.isPermissionExist(p)) {
             // check name
             if (this.permissionService.isSameName(p)) {
-
                 throw new IdInvalidException("Permisson đã tồn tại");
             }
         }
