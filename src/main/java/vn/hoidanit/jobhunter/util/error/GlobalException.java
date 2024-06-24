@@ -2,7 +2,6 @@ package vn.hoidanit.jobhunter.util.error;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,9 +27,9 @@ public class GlobalException {
 
         RestResponse<Object> res = new RestResponse<Object>();
         res.setStatusCode(HttpStatus.BAD_REQUEST.value());
-        res.setError(ex.getMessage());
-        // res.setMessage("IdInvalidException");
-        res.setMessage("Exception occurs...");
+
+        res.setMessage(ex.getMessage());
+        res.setError("Exception occurs...");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(res);
     }
 
@@ -41,8 +40,8 @@ public class GlobalException {
 
         RestResponse<Object> res = new RestResponse<Object>();
         res.setStatusCode(HttpStatus.BAD_REQUEST.value());
-        res.setError(ex.getMessage());
-        res.setMessage("404 Not Found. URL may not exit...");
+        res.setMessage(ex.getMessage());
+        res.setError("404 Not Found. URL may not exit...");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(res);
     }
 
@@ -78,9 +77,9 @@ public class GlobalException {
 
         RestResponse<Object> res = new RestResponse<Object>();
         res.setStatusCode(HttpStatus.BAD_REQUEST.value());
-        res.setError(ex.getMessage());
+        res.setMessage(ex.getMessage());
         // res.setMessage("IdInvalidException");
-        res.setMessage("Exception upload file...");
+        res.setError("Exception upload file...");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(res);
     }
 
@@ -91,8 +90,8 @@ public class GlobalException {
 
         RestResponse<Object> res = new RestResponse<Object>();
         res.setStatusCode(HttpStatus.FORBIDDEN.value()); // Mã lỗi 403 người dùng không có quyền hạn
-        res.setMessage("Forbidden");
-        res.setError(ex.getMessage());
+        res.setMessage(ex.getMessage());
+        res.setError("Forbidden");
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(res);
     }
 

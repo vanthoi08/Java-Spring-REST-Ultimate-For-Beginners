@@ -114,4 +114,9 @@ public class SubscriberService {
     // System.out.println(">>> TEST CRON");
     // }
 
+    public Subscriber findByEmail(String email) {
+        return this.subscriberRepository.findByEmail(email);
+
+    }
+
 }
